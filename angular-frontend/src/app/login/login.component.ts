@@ -11,10 +11,10 @@ import { LoginService } from '../services/login.service';
 export class LoginComponent implements OnInit {
   user: User = {
     id: null,
-    userName: "",
-    password: "",
-    firstName: "",
-    lastName: ""
+    userName: null,
+    password: null,
+    firstName: null,
+    lastName: null
   };
 
   constructor(

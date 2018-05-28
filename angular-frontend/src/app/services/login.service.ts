@@ -9,7 +9,7 @@ const httpOptions = {
 
 @Injectable()
 export class LoginService {
-  loginUrl: string = "http://localhost:8080/loginUser";
+  loginUrl: string = "http://localhost:8080/getUser";
   constructor(private http: HttpClient) { }
 
   userSignIn(user: User) : Observable<any> {

@@ -9,12 +9,10 @@
     width : 400px;
     height : 100%;
     margin : 0 auto;
-    overflow: hidden;
 }
 
 .login-container > div{
     position:absolute;
-    
     top : 230px;
     width: 100%;
     /* bottom : 200px; */
