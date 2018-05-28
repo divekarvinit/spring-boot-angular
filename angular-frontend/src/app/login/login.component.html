@@ -6,11 +6,11 @@
                 <form>
                     <div class="form-group">
                         <label for="UserName">Email or Username</label>
-                        <input type="text" id="UserName" [(ngModel)] = "userName" class="form-control" name="UserName"/>
+                        <input type="text" id="UserName" [(ngModel)] = "user.userName" class="form-control" name="UserName"/>
                     </div>
                     <div class="form-group">
                         <label for="Password">Password</label>
-                        <input type="password" id="Password" [(ngModel)] = "password" class="form-control" name="Password"/>
+                        <input type="password" id="Password" [(ngModel)] = "user.password" class="form-control" name="Password"/>
                     </div>
                     <button type="button" id="SignIn" class="btn btn-success" (click)="signIn()" >Sign In</button>
                 </form>

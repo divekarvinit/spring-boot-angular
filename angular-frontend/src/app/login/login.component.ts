@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { User } from '../user';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -6,16 +9,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  userName : string;
-  password : string;
-  constructor() { }
+  user: User = {
+    id: null,
+    userName: "",
+    password: "",
+    firstName: "",
+    lastName: ""
+  };
+
+  constructor(
+    private http: HttpClient,
+    private loginService: LoginService) { }
 
   ngOnInit() {
     // this.userName ="Vinit";
   }
 
-  signIn() : void {
-    alert(this.userName + " ::::: " + this.password);
-
+  signIn(): void {
+    this.loginService.userSignIn(this.user).subscribe(
+      response => {
+        console.log(response);
+      }
+    );
   }
 }
