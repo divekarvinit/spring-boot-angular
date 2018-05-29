@@ -1,0 +1,17 @@
+<div class="page-container">
+  <div class="login-container">
+      <div class="login-container-inner">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a routerLink = "/login" routerLinkActive="active" class="nav-link" id="signin-tab" data-toggle="tab" href="#signin" role="tab" aria-controls="signin" aria-selected="true">Signin</a>
+              </li>
+              <li class="nav-item">
+                <a routerLink = "/signup" routerLinkActive="active" class="nav-link" id="signup-tab" data-toggle="tab" href="#signup" role="tab" aria-controls="signup" aria-selected="false">Singup</a>
+              </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <router-outlet></router-outlet>
+          </div>
+      </div>
+  </div>
+</div>

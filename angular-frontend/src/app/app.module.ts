@@ -12,7 +12,9 @@ import { LoginService } from './services/login.service';
 import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './user/login/login.component';
+import { UserComponent } from './user/user.component';
+import { SignUpComponent } from './user/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { LoginComponent } from './login/login.component';
     HeroDetailComponent,
     MessagesComponent,
     DashboardComponent,
-    LoginComponent
+    LoginComponent,
+    UserComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
