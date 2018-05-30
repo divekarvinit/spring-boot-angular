@@ -9,13 +9,7 @@ import { User } from "../../user";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  user: User = {
-    id: null,
-    userName: null,
-    password: null,
-    firstName: null,
-    lastName: null
-  };
+  user: User; 
 
   constructor(
     private http: HttpClient,
@@ -23,12 +17,25 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     // this.userName ="Vinit";
+    this.resetForm();
+  }
+
+  resetForm() : void {
+    this.user = {
+      userName: null,
+      password: null,
+      firstName: null,
+      lastName: null
+    };
   }
 
   signIn(): void {
     this.loginService.userSignIn(this.user).subscribe(
-      response => {
-        console.log(response);
+      data => {
+        console.log("Successs" + data.status);
+      },
+      error => {
+        console.log("error" + error.error);
       }
     );
   }
