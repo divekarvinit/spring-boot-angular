@@ -1,8 +1,6 @@
 package com.vinit.angularspringboot.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,22 +10,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vinit.angularspringboot.InvalidCredentialException;
 import com.vinit.angularspringboot.domainObjects.UserProfile;
+import com.vinit.angularspringboot.services.UserProfileService;
 
 @RestController
 public class UserProfileContoller {
 
+	@Autowired
+	UserProfileService userProfileService;
+	
 	@CrossOrigin("*")
 	@RequestMapping(value="/getUser",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Map<String, Object>> getUser(@RequestBody UserProfile user){
-		Map<String,Object> returnmap = new HashMap<>();
-		
-		user.setFirstName("Vinit");
-		user.setLastName("Divekar");
-		user.setEmailAddress("vinit@flink.co.nz");
-		returnmap.put("user", user);
-		returnmap.put("success", true);
-		returnmap.put("message", "Login Successful!");
-		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(returnmap);		
+	public ResponseEntity<UserProfile> getUser(@RequestBody UserProfile user){
+		UserProfile returnuser;
+		try {
+			returnuser = userProfileService.userLogin(user);
+			return ResponseEntity.status(HttpStatus.OK).body(returnuser) ;
+		} catch (InvalidCredentialException e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}	
 	}
 }
