@@ -10,4 +10,7 @@ public interface UserProfileRepository extends JpaRepository<UserProfile, String
 
 	public UserProfile findByUserNameAndPasswordAndIsActive(String userName, String password, Character isActive);
 
+	public UserProfile findByUserName(String userName);
+
+	public UserProfile findByEmailAddress(String emailAddress);
 }
