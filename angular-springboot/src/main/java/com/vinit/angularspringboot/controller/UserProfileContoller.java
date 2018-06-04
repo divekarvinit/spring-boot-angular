@@ -1,5 +1,8 @@
 package com.vinit.angularspringboot.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,35 +27,36 @@ public class UserProfileContoller {
 	@Autowired
 	BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	@RequestMapping(value = "/getUser", method = RequestMethod.POST)
-	public ResponseEntity<Object> getUser(@RequestBody UserProfile user) {
-		UserProfile returnuser;
-		//UserProfile userDetails = userProfileService.getUser(user);
-		// return ResponseEntity.status(HttpStatus.OK).body(returnuser) ;
-		return ResponseEntity.status(200).body(user);
+	@RequestMapping(value = "/getUser", method = RequestMethod.GET)
+	public ResponseEntity<Object> getUser() {
+		UserProfile returnUser = userProfileService.getUser();
+		return ResponseEntity.status(200).body(returnUser);
 	}
 
 	@RequestMapping(value = "/sign-up", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Object> signUp(@RequestBody UserProfile userProfile) {
+	public ResponseEntity<Map<String, String>> signUp(@RequestBody UserProfile userProfile) {
+		Map<String, String> returnMap = new HashMap<>();
 		try {
 			if ((userProfile.getUserName() == null && userProfile.getEmailAddress() == null)
-					|| userProfile.getPassword() == null) {
-				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+					|| userProfile.getPassword() == null || userProfile.getFirstName() == null|| userProfile.getLastName() == null) {
+				returnMap.put("message", "Please enter mandatory fields");
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(returnMap);
 			}
-
 			userProfile.setPassword(bCryptPasswordEncoder.encode(userProfile.getPassword()));
 			userProfileService.signUp(userProfile);
 		} catch (LoginException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+			returnMap.put("message", e.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(returnMap);
 		} catch (Exception e) {
-			e.printStackTrace();
+			returnMap.put("message", e.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(returnMap);
 		}
-
-		return ResponseEntity.status(HttpStatus.OK).body("You are successfully registered. Please log in.");
+		returnMap.put("message", "You have successfully registered. Please login to continue");
+		return ResponseEntity.status(HttpStatus.OK).body(returnMap);
 	}
 
 	@RequestMapping(value = "/getAllSUggestions", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public void getAllSuggestion() {
-		System.out.println(SecurityContextHolder.getContext().getAuthentication().getCredentials());
+		System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 	}
 }

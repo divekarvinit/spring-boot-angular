@@ -7,5 +7,7 @@ public interface UserProfileService {
 
 	public UserProfile userLogin(UserProfile userProfile) throws LoginException;
 
-	public void signUp(UserProfile userProfile) throws LoginException; 
+	public void signUp(UserProfile userProfile) throws LoginException;
+
+	public UserProfile getUser(); 
 }

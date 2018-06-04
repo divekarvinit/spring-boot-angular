@@ -5,6 +5,7 @@ import static java.util.Collections.emptyList;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -66,6 +67,11 @@ public class UserProfileServiceImpl implements UserProfileService, UserDetailsSe
 			throw new UsernameNotFoundException(userName);
 		}
 		return new User(userProfile.getUserName(), userProfile.getPassword(), emptyList());
+	}
+
+	@Override
+	public UserProfile getUser() {
+		return userProfileRepo.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
 	}
 
 }

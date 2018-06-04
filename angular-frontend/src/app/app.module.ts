@@ -15,6 +15,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './user/login/login.component';
 import { UserComponent } from './user/user.component';
 import { SignUpComponent } from './user/sign-up/sign-up.component';
+import { GlobalConstant } from './global-constants';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { SignUpComponent } from './user/sign-up/sign-up.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [HeroService, MessageService, LoginService],
+  providers: [HeroService, MessageService, LoginService, GlobalConstant],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

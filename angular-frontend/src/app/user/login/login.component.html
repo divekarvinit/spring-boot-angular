@@ -1,19 +1,15 @@
 <div class="tab-pane fade show active" id="signin" role="tabpanel" aria-labelledby="home-tab">
     <div class="form-container">
         <form>
-            <div class="form-group">
+            <div class="form-group required ">
                 <label for="SignInUserName">Email or Username</label>
                 <input type="text" id="SignInUserName" class="form-control" name="SignInUserName"[(ngModel)]="user.username" />
             </div>
-            <div class="form-group">
+            <div class="form-group required">
                 <label for="SigninPassword">Password</label>
                 <input type="password" id="SigninPassword" class="form-control" name="SignInPassword"  [(ngModel)]= "user.password"/>
             </div>
-            <button (click)="signIn()" type="button" id="SignIn" class="btn btn-success" style="width : 100%; text-align : center; font-size : 18px; font-weight : 500">Sign in</button>
+            <button (click)="signIn()" type="button" id="SignIn" class="btn btn-success login-btn" >Sign in</button>
         </form>
     </div>
 </div>
-
-
-
-
