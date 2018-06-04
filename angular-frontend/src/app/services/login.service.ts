@@ -14,6 +14,7 @@ export class LoginService {
   constructor(private http: HttpClient, private global : GlobalConstant) { }
   
   userSignIn(user: User): Observable<HttpResponse<any>> {
+    debugger;
     return this.http.post(this.loginUrl, user, { headers: httpOptions, observe: "response" });
   }
 

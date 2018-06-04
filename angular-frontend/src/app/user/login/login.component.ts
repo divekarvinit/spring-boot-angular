@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoginService } from '../../services/login.service';
 import { User } from "../../user";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private loginService: LoginService) { }
+    private loginService: LoginService,
+  private router : Router) { }
 
   ngOnInit() {
     // this.userName ="Vinit";
@@ -32,7 +34,13 @@ export class LoginComponent implements OnInit {
   signIn(): void {
     this.loginService.userSignIn(this.user).subscribe(
       data => {
-        console.log("Successs" + data.status);
+        if(data.status == 200){
+          let authHeader = data.headers.get('Authorization');
+          if(authHeader != undefined && authHeader != null){
+            localStorage.setItem('text', JSON.stringify({'val' : authHeader}));
+            this.router.navigate(["/suggestions"]);
+          }
+        }
       },
       error => {
         console.log("error" + error.error);
