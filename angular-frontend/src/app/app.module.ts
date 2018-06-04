@@ -16,6 +16,7 @@ import { LoginComponent } from './user/login/login.component';
 import { UserComponent } from './user/user.component';
 import { SignUpComponent } from './user/sign-up/sign-up.component';
 import { GlobalConstant } from './global-constants';
+import { SuggestionComponent } from './suggestion/suggestion.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { GlobalConstant } from './global-constants';
     DashboardComponent,
     LoginComponent,
     UserComponent,
-    SignUpComponent
+    SignUpComponent,
+    SuggestionComponent
   ],
   imports: [
     BrowserModule,
