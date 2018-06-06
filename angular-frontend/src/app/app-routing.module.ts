@@ -6,12 +6,20 @@ import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { UserComponent } from "./user/user.component";
 import { LoginComponent } from "./user/login/login.component";
 import { SignUpComponent } from "./user/sign-up/sign-up.component";
-import { SuggestionComponent } from './suggestion/suggestion.component';
+import { SuggestionComponent } from './home/suggestion/suggestion.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   { path: 'heroes', component: HeroesComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path : 'suggestions', component : SuggestionComponent},
+  {
+    path: 'home',
+    children: [
+      { path: 'suggestions', component: SuggestionComponent },
+      { path: '', redirectTo: 'suggestions', pathMatch: 'full' }
+    ],
+    component: HomeComponent
+  },
   // {path : '', redirectTo: '/dashboard', pathMatch : 'full'},
   { path: 'detail/:id', component: HeroDetailComponent },
   {

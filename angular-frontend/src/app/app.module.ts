@@ -16,7 +16,10 @@ import { LoginComponent } from './user/login/login.component';
 import { UserComponent } from './user/user.component';
 import { SignUpComponent } from './user/sign-up/sign-up.component';
 import { GlobalConstant } from './global-constants';
-import { SuggestionComponent } from './suggestion/suggestion.component';
+import { SuggestionComponent } from './home/suggestion/suggestion.component';
+import { HomeComponent } from './home/home.component';
+import { NavComponent } from './nav/nav.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { SuggestionComponent } from './suggestion/suggestion.component';
     LoginComponent,
     UserComponent,
     SignUpComponent,
-    SuggestionComponent
+    SuggestionComponent,
+    HomeComponent,
+    NavComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
