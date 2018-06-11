@@ -1,3 +1,58 @@
-<div class="container">
-  <button type="button" class="btn btn-default" id="NewSuggestion"><i class="fas fa-plus"></i>&nbsp;New Suggestion</button>
+<div class="container flex-fill suggestions-container">
+  <h4 style="margin : 10px 0px;">Trip Destination Suggestions</h4>
+  <!-- <div ngFor*="let suggestion in suggestions">
+    <div></div>
+  </div> -->
+  <div class="row suggestion-box">
+    <div  class="col-1">
+      <div style="vertical-align: middle">
+          <img src="assets/images/Photo0132.jpg" alt="..." class="img-fluid rounded-circle" style="border : 1px solid #ddd;vertical-align: middle"/>
+      </div>
+      <div style="width : 100%; text-align: center"><a href="">Vinit</a></div>
+    </div>
+    <div class="col-8">
+      <div class="tip left">
+        <p>Mhalshej Ghats!</p>
+        <div>
+          <a href="" class="btn btn-default"><i class="fa fa-thumbs-up"></i>Like</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row  suggestion-box">
+      <div  class="col-1">
+        <div style="vertical-align: middle">
+            <img src="assets/images/vaidehi.jpg" alt="..." class="img-fluid rounded-circle" style="border : 1px solid #ddd;vertical-align: middle"/>
+        </div>
+        <div style="width : 100%; text-align: center"><a href="">Vaidehi</a></div>
+      </div>
+      <div class="col-8">
+        <div class="tip left">
+          <p>Germany! Guys we gotta have one international picnic. Please!</p>
+          <div>
+            <a href="" class="btn btn-default"><i class="fa fa-thumbs-up"></i>Like</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- <hr style="margin-left : -15px; margin-right : -15px"/> -->
+  <div class="new-suggestion-container">
+    <h4>Suggest a New Trip Location</h4>
+    
+      <div>
+        <form>
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <!-- <label for="Location" class="control-label">Location Name</label> -->
+                <!-- <input type="text" class="form-control"  id="LocationName"/> -->
+                <textarea name="" id="LocationName" rows="7" class="form-control" placeholder="Name/ Description of Location..."></textarea>
+              </div>
+            </div>
+          </div>
+          <button id="SaveSuggestion" class="btn btn-primary btn-trip" type="button">Post Your Suggestion</button>
+        </form>
+    </div>
+  </div>
 </div>
