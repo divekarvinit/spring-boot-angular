@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { User } from "../user";
+import { Router } from '@angular/router';
 import { GlobalConstant } from '../global-constants';
 
 const httpOptions = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -11,7 +12,7 @@ export class LoginService {
   loginUrl: string = this.global.baseUrl + "/login";
   signUpUrl : string = this.global.baseUrl + "/sign-up";
 
-  constructor(private http: HttpClient, private global : GlobalConstant) { }
+  constructor(private http: HttpClient, private global : GlobalConstant, private router : Router) { }
   
   userSignIn(user: User): Observable<HttpResponse<any>> {
     debugger;
@@ -21,5 +22,11 @@ export class LoginService {
   userSignUp(user: User): Observable<HttpResponse<any>> {
     // return this.http.post(this)
     return this.http.post(this.signUpUrl, user, { headers: httpOptions, observe: "response" });
+  }
+
+  userLogout() : void {
+    localStorage.removeItem('text');
+    this.global.isAuthenticated = false;
+    this.router.navigate(["/login"]);
   }
 }

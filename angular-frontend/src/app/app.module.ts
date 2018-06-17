@@ -20,6 +20,7 @@ import { SuggestionComponent } from './home/suggestion/suggestion.component';
 import { HomeComponent } from './home/home.component';
 import { NavComponent } from './nav/nav.component';
 import { FooterComponent } from './footer/footer.component';
+import{AuthGuard} from './services/auth.guard';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { FooterComponent } from './footer/footer.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [HeroService, MessageService, LoginService, GlobalConstant],
+  providers: [HeroService, MessageService, LoginService, GlobalConstant, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
