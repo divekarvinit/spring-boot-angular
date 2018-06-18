@@ -2,11 +2,13 @@ package com.vinit.angularspringboot.domainObjects;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -89,7 +91,20 @@ public class UserProfile implements Serializable {
 	
 	@Column(name="is_active")
 	private Character isActive;
+	
+	@OneToMany(mappedBy = "user")
+	private Set<Suggestion> suggestions;
+	
+	@OneToMany(mappedBy = "user")
+	private Set<SuggestionLike> suggestionLikes;
+	
+	public Set<Suggestion> getSuggestions() {
+		return suggestions;
+	}
 
+	public void setSuggestions(Set<Suggestion> suggestions) {
+		this.suggestions = suggestions;
+	}
 
 	public Character getIsActive() {
 		return isActive;
