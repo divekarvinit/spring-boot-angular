@@ -33,17 +33,24 @@ public class UserProfileContoller {
 		return ResponseEntity.status(200).body(returnUser);
 	}
 
-	@RequestMapping(value = "/sign-up", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Map<String, String>> signUp(@RequestBody UserProfile userProfile) {
+	@RequestMapping(value = "/sign-up", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Map<String, String>> signUp(@RequestBody HashMap<String, String> requestParam) {
 		Map<String, String> returnMap = new HashMap<>();
 		try {
-			if ((userProfile.getUserName() == null && userProfile.getEmailAddress() == null)
-					|| userProfile.getPassword() == null || userProfile.getFirstName() == null|| userProfile.getLastName() == null) {
+			if ((requestParam.get("userName") == null && requestParam.get("emailAddress")== null)
+					|| requestParam.get("password")== null || requestParam.get("firstName") == null
+					|| requestParam.get("lastName") == null) {
 				returnMap.put("message", "Please enter mandatory fields");
 				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(returnMap);
 			}
-			userProfile.setPassword(bCryptPasswordEncoder.encode(userProfile.getPassword()));
+			UserProfile userProfile = new UserProfile();
+			userProfile.setUserName(requestParam.get("userName"));
+			userProfile.setPassword(bCryptPasswordEncoder.encode(requestParam.get("password")));
+			userProfile.setEmailAddress(requestParam.get("emailAddress"));
+			userProfile.setFirstName(requestParam.get("firstName"));
+			userProfile.setLastName(requestParam.get("lastName"));
 			userProfileService.signUp(userProfile);
+			
 		} catch (LoginException e) {
 			returnMap.put("message", e.getMessage());
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(returnMap);

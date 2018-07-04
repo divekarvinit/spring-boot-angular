@@ -6,7 +6,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -16,14 +16,13 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "user_master")
-@EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties({"suggestions", "suggestionLikes"})
 public class UserProfile implements Serializable {
 
 	/**
@@ -57,7 +56,7 @@ public class UserProfile implements Serializable {
 	@Column(name = "username", length = 55)
 	private String userName;
 
-	@NotNull
+	@JsonIgnore
 	@Column(name = "password")
 	private String password;
 
@@ -92,7 +91,7 @@ public class UserProfile implements Serializable {
 	@Column(name="is_active")
 	private Character isActive;
 	
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private Set<Suggestion> suggestions;
 	
 	@OneToMany(mappedBy = "user")

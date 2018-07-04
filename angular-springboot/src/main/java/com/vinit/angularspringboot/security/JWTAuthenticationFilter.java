@@ -1,11 +1,21 @@
 package com.vinit.angularspringboot.security;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vinit.angularspringboot.domainObjects.UserProfile;
+import static com.vinit.angularspringboot.security.SecurityConstants.EXPIRATION_TIME;
+import static com.vinit.angularspringboot.security.SecurityConstants.HEADER_STRING;
+import static com.vinit.angularspringboot.security.SecurityConstants.SECRET;
+import static com.vinit.angularspringboot.security.SecurityConstants.TOKEN_PREFIX;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -13,18 +23,12 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.vinit.angularspringboot.domainObjects.UserProfile;
 
-import static com.vinit.angularspringboot.security.SecurityConstants.HEADER_STRING;
-import static com.vinit.angularspringboot.security.SecurityConstants.SECRET;
-import static com.vinit.angularspringboot.security.SecurityConstants.TOKEN_PREFIX;
-import static com.vinit.angularspringboot.security.SecurityConstants.EXPIRATION_TIME;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -39,13 +43,13 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public Authentication attemptAuthentication(HttpServletRequest req,
                                                 HttpServletResponse res) throws AuthenticationException {
         try {
-            UserProfile creds = new ObjectMapper()
-                    .readValue(req.getInputStream(), UserProfile.class);
+        	HashMap<String,String> creds = new ObjectMapper()
+                    .readValue(req.getInputStream(),  new TypeReference<HashMap<String, String>>(){});
 
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            creds.getUserName(),
-                            creds.getPassword(),
+                            creds.get("userName"),
+                            creds.get("password"),
                             new ArrayList<>())
             );
         } catch (IOException e) {
