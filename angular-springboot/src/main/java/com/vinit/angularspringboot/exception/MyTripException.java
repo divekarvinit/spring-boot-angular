@@ -1,6 +1,8 @@
-package com.vinit.angularspringboot;
+package com.vinit.angularspringboot.exception;
 
 public class MyTripException extends Exception {
+
+	private static final long serialVersionUID = 1L;
 
 	public MyTripException() {
 		// TODO Auto-generated constructor stub

@@ -22,6 +22,9 @@ export class NavComponent implements OnInit {
   }
 
   get checkIfLoggedIn() {
-    return this.global.isAuthenticated;
+    if(localStorage.getItem("user") && JSON.parse(localStorage.getItem("user")).user){
+      return true;
+    }
+    return false;
   }
 }

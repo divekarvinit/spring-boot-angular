@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.vinit.angularspringboot.LoginException;
+import com.vinit.angularspringboot.exception.LoginException;
 import com.vinit.angularspringboot.repository.UserProfileRepository;
 import com.vinit.angularspringboot.domainObjects.UserProfile;
 import com.vinit.angularspringboot.services.UserProfileService;

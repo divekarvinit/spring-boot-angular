@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vinit.angularspringboot.MyTripException;
+import com.vinit.angularspringboot.exception.LoginException;
+import com.vinit.angularspringboot.exception.MyTripException;
+import com.vinit.angularspringboot.exception.ValidationException;
 import com.vinit.angularspringboot.domainObjects.Suggestion;
 import com.vinit.angularspringboot.services.SuggestionService;
 
@@ -47,14 +49,13 @@ public class SuggestionController {
 	@RequestMapping(value="/postSuggestion", method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_JSON_VALUE, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Map<String, Object>> postSuggestion(@RequestBody Suggestion suggestion){
+	public ResponseEntity<Suggestion> postSuggestion(@RequestBody Suggestion suggestion) throws ValidationException{
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		try {
-			returnMap = suggestionService.postSuggestion(suggestion);
-		} catch (MyTripException e){
+			suggestion = suggestionService.postSuggestion(suggestion);
+		}  catch(LoginException e){
 			returnMap.put("message", e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(returnMap);
 		}
-		return ResponseEntity.status(HttpStatus.OK).body(returnMap);
+		return ResponseEntity.status(HttpStatus.OK).body(suggestion);
 	}
 }

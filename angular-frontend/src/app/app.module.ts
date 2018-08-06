@@ -21,6 +21,7 @@ import { HomeComponent } from './home/home.component';
 import { NavComponent } from './nav/nav.component';
 import { FooterComponent } from './footer/footer.component';
 import{AuthGuard} from './services/auth.guard';
+import { SuggestionService } from "./services/suggestion.service";
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import{AuthGuard} from './services/auth.guard';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [HeroService, MessageService, LoginService, GlobalConstant, AuthGuard],
+  providers: [HeroService, MessageService, LoginService, SuggestionService, GlobalConstant, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

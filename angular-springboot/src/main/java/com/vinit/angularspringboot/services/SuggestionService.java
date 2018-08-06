@@ -3,6 +3,9 @@ package com.vinit.angularspringboot.services;
 import java.util.List;
 import java.util.Map;
 
+import com.vinit.angularspringboot.exception.LoginException;
+import com.vinit.angularspringboot.exception.MyTripException;
+import com.vinit.angularspringboot.exception.ValidationException;
 import com.vinit.angularspringboot.domainObjects.Suggestion;
 import com.vinit.angularspringboot.domainObjects.SuggestionLike;
 
@@ -14,5 +17,5 @@ public interface SuggestionService {
 
 	public Suggestion getSuggestion(Integer suggestionId);
 
-	public Map<String, Object> postSuggestion(Suggestion suggestion);
+	public Suggestion postSuggestion(Suggestion suggestion) throws ValidationException, LoginException;
 }

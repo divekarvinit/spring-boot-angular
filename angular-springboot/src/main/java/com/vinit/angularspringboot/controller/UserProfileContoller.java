@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vinit.angularspringboot.LoginException;
+import com.vinit.angularspringboot.exception.LoginException;
 import com.vinit.angularspringboot.domainObjects.UserProfile;
 import com.vinit.angularspringboot.services.UserProfileService;
 

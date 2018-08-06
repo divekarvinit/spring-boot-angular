@@ -4,4 +4,8 @@ import { Injectable } from '@angular/core';
 export class GlobalConstant {
     baseUrl: string = "http://localhost:8080";
     isAuthenticated: boolean = false;
+
+    getIsAuthecticated() : boolean {
+        return this.isAuthenticated;
+    }
 }

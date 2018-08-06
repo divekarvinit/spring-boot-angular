@@ -15,7 +15,7 @@ export class LoginService {
   constructor(private http: HttpClient, private global : GlobalConstant, private router : Router) { }
   
   userSignIn(user: User): Observable<HttpResponse<any>> {
-    debugger;
+    // debugger;
     return this.http.post(this.loginUrl, user, { headers: httpOptions, observe: "response" });
   }
 
@@ -26,6 +26,7 @@ export class LoginService {
 
   userLogout() : void {
     localStorage.removeItem('text');
+    localStorage.removeItem('user');
     this.global.isAuthenticated = false;
     this.router.navigate(["/login"]);
   }

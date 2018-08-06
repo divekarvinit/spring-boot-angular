@@ -1,6 +1,6 @@
 package com.vinit.angularspringboot.services;
 
-import com.vinit.angularspringboot.LoginException;
+import com.vinit.angularspringboot.exception.LoginException;
 import com.vinit.angularspringboot.domainObjects.UserProfile;
 
 public interface UserProfileService {

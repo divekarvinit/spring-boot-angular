@@ -1,4 +1,4 @@
-package com.vinit.angularspringboot;
+package com.vinit.angularspringboot.exception;
 
 public class LoginException extends Exception {
 

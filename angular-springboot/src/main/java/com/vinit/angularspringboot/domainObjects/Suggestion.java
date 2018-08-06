@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="suggestion")
+@JsonIgnoreProperties({"user"})
 public class Suggestion {
 
 	public Suggestion() {

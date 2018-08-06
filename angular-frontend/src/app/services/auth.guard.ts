@@ -13,9 +13,10 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
-      if(!this.global.isAuthenticated){
+      // debugger;
+      if(!localStorage.getItem('user') && !JSON.parse(localStorage.getItem('user')).user ){
         this.router.navigate(['/']);
       }     
-      return this.global.isAuthenticated;
+      return true;
   }
 }

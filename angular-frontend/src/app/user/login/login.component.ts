@@ -48,7 +48,9 @@ export class LoginComponent implements OnInit {
         if(data.status == 200){
           let authHeader = data.headers.get('Authorization');
           if(authHeader != undefined && authHeader != null){
+            // debugger;
             localStorage.setItem('text', JSON.stringify({'val' : authHeader}));
+            localStorage.setItem('user', JSON.stringify({'user' : this.user.userName}))
             this.global.isAuthenticated = true;
             this.router.navigate(["/home/suggestions"]);
           }
