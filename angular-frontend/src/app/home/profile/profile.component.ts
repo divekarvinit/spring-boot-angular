@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { User } from "../../user";
+import { ProfileService } from "../../services/profile.service";
 
 @Component({
   selector: 'app-profile',
@@ -9,7 +10,8 @@ import { User } from "../../user";
 })
 export class ProfileComponent implements OnInit {
   userInfo : User;
-  constructor() { }
+  fileToBeUploaded : File;
+  constructor(private profileService : ProfileService) { }
 
   ngOnInit() {
     this.getUserInformation();
@@ -22,5 +24,19 @@ export class ProfileComponent implements OnInit {
     //     lastName : 'Divekar',
 
     // }
+
+    this.profileService.getUserInformation()
+    .subscribe(user => this.userInfo = user);
+  }
+
+  handleFileInput(file : FileList) : void {
+    this.fileToBeUploaded = file.item(0);
+  }
+
+  saveData() : void{
+    this.profileService.uploadProfilePicture(this.fileToBeUploaded)
+    .subscribe(response => {
+      
+    })
   }
 }
