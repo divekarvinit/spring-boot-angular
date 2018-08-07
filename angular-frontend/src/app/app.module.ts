@@ -22,6 +22,7 @@ import { NavComponent } from './nav/nav.component';
 import { FooterComponent } from './footer/footer.component';
 import{AuthGuard} from './services/auth.guard';
 import { SuggestionService } from "./services/suggestion.service";
+import { ProfileComponent } from './home/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { SuggestionService } from "./services/suggestion.service";
     SuggestionComponent,
     HomeComponent,
     NavComponent,
-    FooterComponent
+    FooterComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

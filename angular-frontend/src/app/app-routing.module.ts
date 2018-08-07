@@ -9,6 +9,7 @@ import { SignUpComponent } from "./user/sign-up/sign-up.component";
 import { SuggestionComponent } from './home/suggestion/suggestion.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './services/auth.guard';
+import { ProfileComponent } from "./home/profile/profile.component";
 
 const routes: Routes = [
   { path: 'heroes', component: HeroesComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
     path: 'home',
     children: [
       { path: 'suggestions', component: SuggestionComponent, canActivate: [AuthGuard] },
+      { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
       { path: '', redirectTo: 'suggestions', pathMatch: 'full' }
     ],
     component: HomeComponent
