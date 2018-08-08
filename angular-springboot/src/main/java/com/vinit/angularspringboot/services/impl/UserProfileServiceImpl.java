@@ -2,7 +2,10 @@ package com.vinit.angularspringboot.services.impl;
 
 import static java.util.Collections.emptyList;
 
+import java.io.IOException;
 import java.util.Date;
+
+import javax.validation.ValidationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,10 +14,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.vinit.angularspringboot.domainObjects.UserProfile;
 import com.vinit.angularspringboot.exception.LoginException;
 import com.vinit.angularspringboot.repository.UserProfileRepository;
-import com.vinit.angularspringboot.domainObjects.UserProfile;
 import com.vinit.angularspringboot.services.UserProfileService;
 
 @Service
@@ -75,4 +80,13 @@ public class UserProfileServiceImpl implements UserProfileService, UserDetailsSe
 		return userProfileRepo.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
 	}
 
+	@Override
+	@Transactional
+	public void uploadProfilePicture(MultipartFile file) throws IOException {
+		if(file.getContentType() != null && file.getContentType().toLowerCase().contains("image")){
+			userProfileRepo.saveProfilePicture(file.getBytes(), SecurityContextHolder.getContext().getAuthentication().getName());			
+		} else {
+			throw new ValidationException("Only image files can be uploaded");
+		}		
+	}
 }

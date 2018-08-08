@@ -37,7 +37,7 @@ public class UserProfile implements Serializable {
 	
 	public UserProfile(@NotNull String userName, @NotNull String password, @NotNull String firstName,
 			@NotNull String lastName, @NotNull String emailAddress, String createdBy, String modifedBy,
-			Date createdDate, Date modifiedDate, Character isActive) {
+			Date createdDate, Date modifiedDate, Character isActive, byte[] profilePicture) {
 		super();
 		this.userName = userName;
 		this.password = password;
@@ -49,6 +49,7 @@ public class UserProfile implements Serializable {
 		this.createdDate = createdDate;
 		this.modifiedDate = modifiedDate;
 		this.isActive = isActive;
+		this.profilePicture = profilePicture;
 	}
 
 	@Id
@@ -90,6 +91,9 @@ public class UserProfile implements Serializable {
 	
 	@Column(name="is_active")
 	private Character isActive;
+	
+	@Column(name="profile_picture", columnDefinition="BLOB")
+	private byte[] profilePicture;
 	
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private Set<Suggestion> suggestions;
@@ -199,14 +203,23 @@ public class UserProfile implements Serializable {
 	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
 	}
+	
+	public byte[] getProfilePicture(){
+		return profilePicture;
+	}
+	
+	public void setProfilePicture(byte[] profilePicture){
+		this.profilePicture = profilePicture;
+	}
 
-	public UserProfile(String userName, String password, String firstName, String lastName, String emailAddress) {
+	public UserProfile(String userName, String password, String firstName, String lastName, String emailAddress, byte[] profilePicture) {
 		super();
 		this.userName = userName;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.emailAddress = emailAddress;
+		this.profilePicture = profilePicture;
 	}
 
 	@Override

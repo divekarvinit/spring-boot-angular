@@ -30,13 +30,14 @@ export class ProfileComponent implements OnInit {
   }
 
   handleFileInput(file : FileList) : void {
+    debugger;
     this.fileToBeUploaded = file.item(0);
   }
 
   saveData() : void{
     this.profileService.uploadProfilePicture(this.fileToBeUploaded)
     .subscribe(response => {
-      
+      console.log(response);
     })
   }
 }

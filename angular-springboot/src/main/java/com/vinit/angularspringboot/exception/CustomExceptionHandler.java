@@ -32,6 +32,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 	
 	@ExceptionHandler(Exception.class)
 	public final ResponseEntity<AppError> handleAllExceptions(Exception ex, WebRequest request) {
+		System.out.println(ex.getMessage());
 		AppError appError = new AppError(new Date(), "Something went wrong. Please contact system Admin", HttpStatus.INTERNAL_SERVER_ERROR);
 	  return new ResponseEntity<>(appError, HttpStatus.INTERNAL_SERVER_ERROR);
 	}

@@ -9,6 +9,7 @@ import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { HeroService } from './hero.service';
 import { MessageService } from './message.service';
 import { LoginService } from './services/login.service';
+import { ProfileService } from './services/profile.service';
 import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -46,7 +47,7 @@ import { ProfileComponent } from './home/profile/profile.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [HeroService, MessageService, LoginService, SuggestionService, GlobalConstant, AuthGuard],
+  providers: [HeroService, MessageService, LoginService, SuggestionService, GlobalConstant, AuthGuard, ProfileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

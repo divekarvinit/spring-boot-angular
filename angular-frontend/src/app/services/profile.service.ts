@@ -6,7 +6,7 @@ import { GlobalConstant } from "../global-constants";
 @Injectable()
 export class ProfileService {
   getUserInformationUrl : string = this.globalConstant.baseUrl +'/getUser';
-  uploadFileUrl : string = this.globalConstant.baseUrl + '/uploadFile';
+  uploadProfileUrl : string = this.globalConstant.baseUrl + '/uploadProfilePicture';
 
   
   constructor(private http : HttpClient, private globalConstant :GlobalConstant ) { }
@@ -19,13 +19,14 @@ export class ProfileService {
   }
 
   uploadProfilePicture(file:File) : Observable<any>{
-    let httpOptions = new HttpHeaders({'Content-Type' : undefined, 
-    'Authorization' : localStorage.getItem('text') ? JSON.parse(localStorage.getItem('text')).val : '' });
+    debugger;
+    let httpOptions = new HttpHeaders({
+      'Authorization' : localStorage.getItem('text') ? JSON.parse(localStorage.getItem('text')).val : '' 
+    });
     const formData: FormData = new FormData();
     
-    formData.append('fileKey', file, file.name);
-    return this.http.post(this.uploadFileUrl, formData, { headers : httpOptions})
-
+    formData.append('file', file);
+    return this.http.post(this.uploadProfileUrl, formData, { headers : httpOptions});
   }
 }
 

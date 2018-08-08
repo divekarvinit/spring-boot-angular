@@ -1,5 +1,6 @@
 package com.vinit.angularspringboot.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,10 +13,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.vinit.angularspringboot.exception.LoginException;
 import com.vinit.angularspringboot.domainObjects.UserProfile;
+import com.vinit.angularspringboot.exception.LoginException;
 import com.vinit.angularspringboot.services.UserProfileService;
 
 @RestController
@@ -66,4 +69,11 @@ public class UserProfileContoller {
 	public void getAllSuggestion() {
 		System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 	}
+	
+	@RequestMapping(value = "/uploadProfilePicture", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> uploadProfilePicture(@RequestParam("file") MultipartFile file) throws IOException{
+		System.out.println(file);
+		userProfileService.uploadProfilePicture(file);
+		return ResponseEntity.status(HttpStatus.OK).body("File Uploaded");
+	} 
 }
