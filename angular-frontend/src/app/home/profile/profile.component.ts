@@ -10,6 +10,7 @@ import { ProfileService } from "../../services/profile.service";
 })
 export class ProfileComponent implements OnInit {
   userInfo : User;
+  imagePath : string;
   fileToBeUploaded : File;
   constructor(private profileService : ProfileService) { }
 
@@ -26,7 +27,11 @@ export class ProfileComponent implements OnInit {
     // }
 
     this.profileService.getUserInformation()
-    .subscribe(user => this.userInfo = user);
+    .subscribe(user => {
+      debugger;
+      this.userInfo = user;
+      this.imagePath = 'data:' + this.userInfo.contentType + ';base64,' + this.userInfo.profilePictureStr;
+    });
   }
 
   handleFileInput(file : FileList) : void {

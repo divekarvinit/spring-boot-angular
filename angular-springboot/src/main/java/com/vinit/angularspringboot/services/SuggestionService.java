@@ -17,5 +17,5 @@ public interface SuggestionService {
 
 	public Suggestion getSuggestion(Integer suggestionId);
 
-	public Suggestion postSuggestion(Suggestion suggestion) throws ValidationException, LoginException;
+	public Suggestion postSuggestion(Suggestion suggestion) throws ValidationException, LoginException, MyTripException;
 }

@@ -1,7 +1,12 @@
+<div *ngIf="userInfo">
 <div class="form-group">
   <label for="file">Choose File</label>
   <input type="file"
          id="file"
          (change)="handleFileInput($event.target.files)" accept="image/*">
 </div>
+<div style="width : 100px; height : 100px; border : 1px solid red; overflow : hidden; border-radius :50%">
+  <img *ngIf = "userInfo.profilePictureStr" [src]="imagePath  | safeUrl"/>
+</div>
 <button type="button" class="btn btn-primary" (click) = "saveData()">Save</button>
+</div>

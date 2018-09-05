@@ -25,35 +25,32 @@ public class SuggestionController {
 
 	@Autowired
 	SuggestionService suggestionService;
-	
+
 	public SuggestionController() {
-		
+
 	}
-	
-	@RequestMapping(value="/suggestions", method = RequestMethod.GET, 
-			consumes = MediaType.APPLICATION_JSON_VALUE, 
-			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Suggestion>> getAllSuggestions(){
-		
+
+	@RequestMapping(value = "/suggestions", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Suggestion>> getAllSuggestions() {
+
 		return ResponseEntity.status(HttpStatus.OK).body(suggestionService.getAllSuggestion());
 	}
 
-	@RequestMapping(value="/getSuggestion/{suggestionId}", method=RequestMethod.GET,
-			consumes = MediaType.APPLICATION_JSON_VALUE,
-			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Suggestion> getSuggestion(@PathVariable Integer suggestionId){
-		
+	@RequestMapping(value = "/getSuggestion/{suggestionId}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Suggestion> getSuggestion(@PathVariable Integer suggestionId) {
+
 		return ResponseEntity.status(HttpStatus.OK).body(suggestionService.getSuggestion(suggestionId));
 	}
-	
-	@RequestMapping(value="/postSuggestion", method = RequestMethod.POST,
+
+	@RequestMapping(value = "/postSuggestion", method = RequestMethod.POST, 
 			consumes = MediaType.APPLICATION_JSON_VALUE, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Suggestion> postSuggestion(@RequestBody Suggestion suggestion) throws ValidationException{
+	public ResponseEntity<Suggestion> postSuggestion(@RequestBody Suggestion suggestion)
+			throws ValidationException, MyTripException {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		try {
 			suggestion = suggestionService.postSuggestion(suggestion);
-		}  catch(LoginException e){
+		} catch (LoginException e) {
 			returnMap.put("message", e.getMessage());
 		}
 		return ResponseEntity.status(HttpStatus.OK).body(suggestion);

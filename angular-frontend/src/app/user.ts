@@ -5,4 +5,6 @@ export class User {
     lastName? : string;
     emailAddress? : string;
     profilePicture? : string;
+    contentType? : string;
+    profilePictureStr? : string;
 }

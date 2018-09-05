@@ -2,11 +2,15 @@ package com.vinit.angularspringboot.services.impl;
 
 import static java.util.Collections.emptyList;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.net.URLConnection;
 import java.util.Date;
 
 import javax.validation.ValidationException;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -17,8 +21,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.vinit.angularspringboot.converter.UserProfileConverter;
 import com.vinit.angularspringboot.domainObjects.UserProfile;
+import com.vinit.angularspringboot.dto.UserDTO;
 import com.vinit.angularspringboot.exception.LoginException;
+import com.vinit.angularspringboot.exception.MyTripException;
 import com.vinit.angularspringboot.repository.UserProfileRepository;
 import com.vinit.angularspringboot.services.UserProfileService;
 
@@ -76,8 +83,20 @@ public class UserProfileServiceImpl implements UserProfileService, UserDetailsSe
 	}
 
 	@Override
-	public UserProfile getUser() {
-		return userProfileRepo.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
+	public UserDTO getUser() throws MyTripException {
+		UserProfile user = userProfileRepo.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
+		UserDTO userDto = new UserProfileConverter().convertToUserDTO(user);
+//		InputStream stream = new InputStream
+		try
+		{
+			userDto.setContentType(URLConnection.guessContentTypeFromStream(
+					new BufferedInputStream(
+							new ByteArrayInputStream(user.getProfilePicture()))
+					));	
+		} catch(Exception e){
+			throw new MyTripException("Error getting profile image");
+		}
+		return userDto;
 	}
 
 	@Override

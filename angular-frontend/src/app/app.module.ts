@@ -24,6 +24,7 @@ import { FooterComponent } from './footer/footer.component';
 import{AuthGuard} from './services/auth.guard';
 import { SuggestionService } from "./services/suggestion.service";
 import { ProfileComponent } from './home/profile/profile.component';
+import { SafeUrlPipe } from './services/safe-url.pipe';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ProfileComponent } from './home/profile/profile.component';
     HomeComponent,
     NavComponent,
     FooterComponent,
-    ProfileComponent
+    ProfileComponent, 
+    SafeUrlPipe
   ],
   imports: [
     BrowserModule,

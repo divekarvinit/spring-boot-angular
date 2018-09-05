@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.vinit.angularspringboot.domainObjects.UserProfile;
+import com.vinit.angularspringboot.dto.UserDTO;
 import com.vinit.angularspringboot.exception.LoginException;
+import com.vinit.angularspringboot.exception.MyTripException;
 import com.vinit.angularspringboot.services.UserProfileService;
 
 @RestController
@@ -31,8 +33,8 @@ public class UserProfileContoller {
 	BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@RequestMapping(value = "/getUser", method = RequestMethod.GET)
-	public ResponseEntity<Object> getUser() {
-		UserProfile returnUser = userProfileService.getUser();
+	public ResponseEntity<Object> getUser() throws MyTripException {
+		UserDTO returnUser = userProfileService.getUser();
 		return ResponseEntity.status(200).body(returnUser);
 	}
 
